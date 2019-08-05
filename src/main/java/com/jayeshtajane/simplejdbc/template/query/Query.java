@@ -7,15 +7,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jayeshtajane.simplejdbc.JdbcTemplate;
 import com.jayeshtajane.simplejdbc.mapper.RowMapper;
 
+/**
+ * <p>This class is use to perform a database operations.
+ * You don't need to create this object. You have just call the <code>createQuery()</code>
+ * method which is present in <code>JdbcTemplate</code>.</p>
+ * 
+ * @author Jayesh Tajane
+ *
+ * @version 1.0
+ * @see JdbcTemplate#createQuery(String)
+ * @see JdbcTemplate#createQuery(String, Object...)
+ */
 public class Query {
 
-	/* Storing the connection object */
+	/**
+	 *  <p>Storing the connection object</p> 
+	 */
 	private Connection connection;
-	/* Stores the PreparedStatement for current query */
+	
+	/**
+	 *  <p>Stores the PreparedStatement for current query</p> 
+	 */
 	private PreparedStatement statement;
 	
+	/**
+	 * <p>Creating <code>Query</code> object by using <code>userQuery</code> and <code>connection</code> .
+	 * Setting <code>connection</code> and <code>statement</code>.</p>
+	 * 
+	 * @param userQuery - SQL query provided by programmer.
+	 * @param connection - <code>Connection</code> object
+	 */
 	public Query(String userQuery, Connection connection) {
 		super();
 		/* Setting connection */
@@ -28,12 +52,20 @@ public class Query {
 		}
 	}
 
+	/**
+	 * <p>Creating <code>Query</code> object by using <code>userQuery</code>, 
+	 * <code>connection</code> and <code>queryParam</code></p>
+	 * 
+	 * @param userQuery - SQL query provided by programmer.
+	 * @param connection - <code>Connection</code> object
+	 * @param queryParam - Values that you want to replace with question marks
+	 *  that are present in query. Order must follow.
+	 */
 	public Query(String userQuery, Connection connection, Object... queryParam) {
 		super();
 		/* Setting connection */
 		this.connection = connection;
 		
-		/* Creating a Query q=jt.createQuery("select * from emptab where eid=10"); */
 		try {
 			this.statement = this.connection.prepareStatement(userQuery);
 		} catch (SQLException e) {
@@ -46,9 +78,12 @@ public class Query {
 	}
 
 	/**
-	 * Setting Setting parameters to Query object. This function internally set the provided data to the PreparedStatement object.
-	 * @param index - indicates the parameter index.
-	 * @param data - indicates the data of index value.
+	 * <p>Setting parameters to Query object. This function internally 
+	 * set the provided data to the PreparedStatement object.</p>
+	 * 
+	 * @param index - indicates the index of question mark in query. Not exactly index see the example.
+	 * @param data - indicates the value that you want to replace with question marks given index in query.
+	 * 
 	 */
 	public void setQueryParam(int index, Object data) {
 		System.err.println("INFO: Parameter setting starts index is " + index);
@@ -62,10 +97,13 @@ public class Query {
 	}
 	
 	/**
-	 * Setting Setting parameters to Query object. 
-	 * This function internally set the provided data to the PreparedStatement object using setQueryParam(int index, Object data).
-	 * Position of data is matters. 
-	 * @param data
+	 * <p>Setting Setting parameters to Query object. 
+	 * This function internally set the provided data to the PreparedStatement 
+	 * object using setQueryParam(int index, Object data).
+	 * Position of data is matters. </p>
+	 * 
+	 * @param data - indicates the list of values that you want to replace with 
+	 * question marks of query. Order must follow.
 	 */
 	public void setQueryParam(Object... data) {
 		for(int i=0;i<data.length;i++) {
@@ -74,7 +112,8 @@ public class Query {
 	}
 	
 	/**
-	 * When you want to execute the non-select query means CREATE, UPADATE, DELETE etc.
+	 * <p>When you want to execute the non-select query means CREATE, UPADATE, 
+	 * DELETE etc. then use this function</p>
 	 * @return - number of rows affected.
 	 */
 	public int update() {
@@ -91,9 +130,13 @@ public class Query {
 	}
 	
 	/**
-	 * When your operation is SELECT and you know the query returns only one or zero row then use this function.  
+	 * <p>When your operation is SELECT and you know the query returns only 
+	 * one or zero row then use this function.
+	 * If your query returns the more than two rows then the first row of 
+	 * that result will return.</p>
+	 * 
 	 * @param rowMapper - implementation class of RowMapper
-	 * @return - List<T>
+	 * @return - object of <code>T</code>
 	 */
 	public <T> T get(RowMapper<T> rowMapper) {
 		System.err.println("INFO: Query execution starts get(...)");
@@ -111,9 +154,11 @@ public class Query {
 	}
 	
 	/**
-	 * When your operation is SELECT and you know the query returns one more rows then use this function.  
+	 * <p>When your operation is SELECT and you know the query returns 
+	 * zero more rows then use this function.</p>
+	 *   
 	 * @param rowMapper - implementation class of RowMapper
-	 * @return - List<T>
+	 * @return - List
 	 */
 	public <T> List<T> load(RowMapper<T> rowMapper) {
 		System.err.println("INFO: Query execution starts loadAll(...)");
@@ -129,9 +174,5 @@ public class Query {
 		}
 		System.err.println("INFO: Query execution ends loadAll(...)");
 		return dataList;
-	}
-	
-	public <T> T[] loadAll(Class<T> userClass) {
-		return null;
 	}
 }
