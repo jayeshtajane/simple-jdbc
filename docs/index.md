@@ -183,7 +183,7 @@ System.out.println(e);
 
 ## Example code
 
-1. app.properties
+* app.properties
 
 ```
 jdbc.driver=com.mysql.jdbc.Driver
@@ -192,7 +192,7 @@ jdbc.username=root
 jdbc.password=tiger
 ```
 
-2. Employee.java
+* Employee.java
 
 ```
 public class Employee {
@@ -228,8 +228,7 @@ public class Employee {
 }
 
 ```
-
-3. EmployeeRowMapper.java
+* EmployeeRowMapper.java
 
 ```
 import java.sql.ResultSet;
@@ -248,7 +247,7 @@ public class EmployeeRowMapper implements RowMapper <Employee> {
 
 ```
 
-4. Test.java
+* Test.java
 
 ```
 import java.util.List;
@@ -300,8 +299,8 @@ public class Example {
     	el.forEach(System.out::println);
     }
 }
-
 ```
+
 ## Referance links
 
 * [API](https://jayeshtajane.github.io/docs/simple-jdbc/index.html) - API docs
