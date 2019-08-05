@@ -4,7 +4,7 @@ Simple JDBC API provides the abstraction layer on JDBC API. It simplifies the us
 
 ## Getting Started
 
-If you want to use this API you need to add [jdbc-template.jar](https://github.com/jayeshtajane/simple-jdbc) in your project class path.
+If you want to use this API you need to add [jdbc-template.jar](https://github.com/jayeshtajane/simple-jdbc/releases) in your project class path.
 To do any JDBC operation you must need the object of JdbcTemplate.
 
 ### Creating JdbcTemplate
@@ -184,6 +184,7 @@ System.out.println(e);
 ## Example code
 
 1. app.properties
+
 ```
 jdbc.driver=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://localhost:3306/test
@@ -192,6 +193,7 @@ jdbc.password=tiger
 ```
 
 2. Employee.java
+
 ```
 public class Employee {
   private int empId;
@@ -228,6 +230,7 @@ public class Employee {
 ```
 
 3. EmployeeRowMapper.java
+
 ```
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -246,6 +249,7 @@ public class EmployeeRowMapper implements RowMapper <Employee> {
 ```
 
 4. Test.java
+
 ```
 import java.util.List;
 import com.jayeshtajane.simplejdbc.JdbcTemplate;
@@ -300,7 +304,7 @@ public class Example {
 ```
 ## Referance links
 
-* [Documentation](http://www.dropwizard.io/1.0.2/docs/) - Documentation
+* [API](https://jayeshtajane.github.io/docs/simple-jdbc/index.html) - API docs
 * [GitHub](https://github.com/jayeshtajane/simple-jdbc) - GitHub repository
 
 ## Authors
