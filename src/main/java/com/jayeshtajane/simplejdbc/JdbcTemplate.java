@@ -12,7 +12,7 @@ import com.jayeshtajane.simplejdbc.template.query.Query;
  * @author Jayesh Tajane
  * @version 1.0
  * @see Query
- */
+ */ 
 public interface JdbcTemplate {
 	
 	/**
