@@ -25,6 +25,10 @@ import com.jayeshtajane.simplejdbc.template.query.Query;
  */
 public class SimpleJdbcTemplate implements JdbcTemplate {
 	/**
+	 * Serial version id
+	 */
+	private static final long serialVersionUID = -2121839645248751969L;
+	/**
 	 * <p>store the database properties.</p>
 	 */
 	private Properties jdbcProperties;
@@ -146,5 +150,17 @@ public class SimpleJdbcTemplate implements JdbcTemplate {
 		Query query = new Query(sqlQuery, getConnection(), params);
 		System.err.println("INFO: Query creation process ends");
 		return query;
+	}
+	
+	/**
+	 * Use for closing the connection of database.
+	 */
+	@Override
+	protected void finalize() throws Throwable {
+		super.finalize();
+		if(connection != null) {
+			if(!connection.isClosed()) 
+				connection.close();
+		}
 	}
 }

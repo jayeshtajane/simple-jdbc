@@ -1,5 +1,6 @@
 package com.jayeshtajane.simplejdbc;
 
+import java.io.Serializable;
 import java.sql.Connection;
 
 import com.jayeshtajane.simplejdbc.template.query.Query;
@@ -13,7 +14,7 @@ import com.jayeshtajane.simplejdbc.template.query.Query;
  * @version 1.0
  * @see Query
  */ 
-public interface JdbcTemplate {
+public interface JdbcTemplate extends Serializable {
 	
 	/**
 	 * <p>Making the connection with database using given jdbc properties.</p>
