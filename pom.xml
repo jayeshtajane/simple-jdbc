@@ -5,7 +5,7 @@
 
 	<groupId>com.jayeshtajane</groupId>
 	<artifactId>simple-jdbc</artifactId>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>simple-jdbc</name>
